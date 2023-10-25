@@ -1,36 +1,39 @@
-class bank_account:
+'''
+Implement a function called sort_students that takes a list of student objects as input and sorts the
+list based on their CGPA (Cumulative Grade Point Average) in descending order. Each student object
+has the following attributes: name (string), roll_number (string), and cgpa (float). Test the function
+with different input lists of students.
+'''
 
-  def __init__(self,account_number,
-               account_holder_name,account_balance=0.0):
-    self.__account_number=account_number
-    self.__account_holder_name=account_holder_name
-    self.__account_balance=account_balance
+class Student:
 
-  def deposit_money(self,amount):
-    if amount > 0:
-      self.__account_balance += amount 
-      print("Deposited:₹{} ;balance:₹{}".format(amount,
-                                self.__account_balance))
-    else:
-      print("Invalid deposite money")
-      
-  def withdraw_money(self,amount):
-    if amount > 0 and amount <= self.__account_balance:
-      self.__account_balance -= amount
-      print("withdraw:₹{} ; new balance:₹{}".format
-                        (amount,self.__account_balance))
-    else:
-      print("Invalid withdrawal money")
-
-  def display_balance(self):
-    print("account balance for {} (account no.{}) is ₹ {}".format(self.__account_holder_name,
-         self.__account_number,self.__account_balance))
+  def __init__(self, name, roll_number, cgpa):
+    self.name = name
+    self.roll_number = roll_number
+    self.cgpa = cgpa
 
 
-account=bank_account(account_holder_name="shaf",
-                     account_number="123456",
-                     account_balance=5000.0)
-account.display_balance()
-account.deposit_money(500.0)
-account.withdraw_money(2000.0)
-account.display_balance()
+def sort_students(student_list):
+  # Sort the list of students in descending order of CGPA
+  sorted_students = sorted(student_list,
+                           key=lambda student: student.cgpa,
+                           reverse=True)
+  # Syntax - lambda arg:exp
+  return sorted_students
+
+
+# Example usage:
+students = [
+    Student("Hari", "A123", 7.8),
+    Student("Srikanth", "A124", 8.9),
+    Student("Saumya", "A125", 9.1),
+    Student("Mahidhar", "A126", 9.9),
+]
+
+sorted_students = sort_students(students)
+
+# Print the sorted list of students
+for student in sorted_students:
+  print("Name: {}, Roll Number: {}, CGPA: {}".format(student.name,
+                                                     student.roll_number,
+                                                     student.cgpa))
